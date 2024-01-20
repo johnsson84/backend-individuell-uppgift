@@ -1,4 +1,8 @@
 package com.example.backendlibrary.repositories;
 
-public interface UsersRepository {
+import com.example.backendlibrary.models.Users;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface UsersRepository extends MongoRepository<Users, String> {
+
 }
