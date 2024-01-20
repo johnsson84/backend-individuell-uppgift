@@ -32,4 +32,11 @@ public class BooksController {
     public Books listOneBook(@PathVariable String id) {
         return bookService.listOneBook(id);
     }
+
+    // DELETE Delete a book by ID
+    @DeleteMapping("/delete/{id}")
+    public String deleteBook(@PathVariable String id) {
+        bookService.deleteBook(id);
+        return "Book deleted!";
+    }
 }

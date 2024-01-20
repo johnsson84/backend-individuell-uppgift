@@ -27,4 +27,9 @@ public class BooksService {
     public Books listOneBook(String id) {
         return bookRepo.findById(id).get();
     }
+
+    // Delete a book by ID
+    public void deleteBook(String id) {
+        bookRepo.deleteById(id);
+    }
 }
