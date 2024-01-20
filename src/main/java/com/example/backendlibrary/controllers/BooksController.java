@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/book")
+@RequestMapping(path = "/api/books")
 public class BooksController {
 
     @Autowired
@@ -28,15 +28,21 @@ public class BooksController {
     }
 
     // GET List one book by ID
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public Books listOneBook(@PathVariable String id) {
         return bookService.listOneBook(id);
     }
 
     // DELETE Delete a book by ID
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
         return "Book deleted!";
+    }
+
+    // PUT Update a book by ID
+    @PutMapping("/{id}")
+    public String updateBook(@PathVariable String id, @RequestBody Books book) {
+        return bookService.updateBook(id, book);
     }
 }

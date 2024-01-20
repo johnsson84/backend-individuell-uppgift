@@ -32,4 +32,17 @@ public class BooksService {
     public void deleteBook(String id) {
         bookRepo.deleteById(id);
     }
+
+    // Update a book by ID
+    public String updateBook(String id, Books book) {
+        List<Books> allBooks = bookRepo.findAll();
+        for (Books books : allBooks) {
+            if (id.equals(books.getId()) && book.getId().equals(id)) {
+                bookRepo.save(book);
+                return "Book updated!";
+            }
+        }
+        return "Book not found...";
+
+    }
 }
