@@ -17,8 +17,7 @@ public class BooksController {
     // POST Add a new book
     @PostMapping()
     public String addBook(@RequestBody Books book) {
-        bookService.addBook(book);
-        return "Book \"" + book.getTitle() + "\" added!";
+        return bookService.addBook(book);
     }
 
     // GET List all books
@@ -36,8 +35,7 @@ public class BooksController {
     // DELETE Delete a book by ID
     @DeleteMapping("/{id}")
     public String deleteBook(@PathVariable String id) {
-        bookService.deleteBook(id);
-        return "Book deleted!";
+        return bookService.deleteBook(id);
     }
 
     // PUT Update a book by ID
