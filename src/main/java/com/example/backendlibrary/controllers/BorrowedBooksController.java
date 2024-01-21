@@ -37,4 +37,11 @@ public class BorrowedBooksController {
     public String deleteLoan(@PathVariable String id) {
         return borrowService.deleteLoan(id);
     }
+
+    // PUT Update a loan
+    @PutMapping("/{id}")
+    public String updateLoan(@PathVariable String id, @RequestBody BorrowedBooks loan) {
+        return borrowService.updateLoan(id, loan);
+    }
+
 }

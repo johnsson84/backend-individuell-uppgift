@@ -43,7 +43,7 @@ public class BorrowedBooksService {
                 borrow.setBorrowers_name(user.getName());
             }
         }
-        // If no book name or user name was found, give error
+        // If no book name or users name was found, give error
         if (borrow.getBook_name().equals("") || borrow.getBorrowers_name().equals("")) {
             return "ERROR: User or book does not exist";
         }
@@ -66,5 +66,19 @@ public class BorrowedBooksService {
             }
         }
         return "ERROR: Loan does not exist";
+    }
+
+    // Update a loan
+    public String updateLoan(String id, BorrowedBooks loan) {
+        // Temp save all existing loans
+        List<BorrowedBooks> allLoans = borrowRepo.findAll();
+        // When updating, check if ID in PATH and BODY is the same and exists in loans
+        for (BorrowedBooks loans : allLoans) {
+            if (id.equals(loans.getId()) && loan.getId().equals(id)) {
+                borrowRepo.save(loan);
+                return "Loan successfully updated!";
+            }
+        }
+        return "ERROR: Loan does not exist!";
     }
 }
