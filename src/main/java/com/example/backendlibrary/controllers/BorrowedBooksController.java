@@ -25,4 +25,10 @@ public class BorrowedBooksController {
     public String borrowBook(@RequestBody BorrowedBooks borrow) {
         return borrowService.borrowBook(borrow);
     }
+
+    // GET List a specific loan
+    @GetMapping("/{id}")
+    public BorrowedBooks listOneLoan(@PathVariable String id) {
+        return borrowService.listOneLoan(id);
+    }
 }

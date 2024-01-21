@@ -30,7 +30,7 @@ public class BorrowedBooks {
         return book_id;
     }
 
-    public String getUser_id() {
+    public String getBorrowers_id() {
         return borrowers_id;
     }
 
@@ -46,7 +46,7 @@ public class BorrowedBooks {
         return book_name;
     }
 
-    public String getUser_name() {
+    public String getBorrowers_name() {
         return borrowers_name;
     }
 }

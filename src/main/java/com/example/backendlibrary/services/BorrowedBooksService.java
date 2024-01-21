@@ -20,7 +20,13 @@ public class BorrowedBooksService {
 
     // Borrow a book
     public String borrowBook(BorrowedBooks borrow) {
+
         borrowRepo.save(borrow);
         return "\"" + borrow.getBook_name() + "\" borrowed!";
+    }
+
+    // List a specific loan
+    public BorrowedBooks listOneLoan(String id) {
+        return borrowRepo.findById(id).get();
     }
 }
