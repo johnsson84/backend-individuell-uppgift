@@ -48,14 +48,14 @@ public class UsersService {
     public String updateUser(String id, Users user) {
         // Temp save all existing users
         List<Users> allUsers = userRepo.findAll();
-        // When updating, check if id in path and body is same and exists in users
+        // When updating, check if ID in PATH and BODY is same and exists in users
         for (Users users : allUsers) {
             if (id.equals(users.getId()) && user.getId().equals(id)) {
                 userRepo.save(user);
                 return "User updated!";
             }
         }
-        return "User not found...";
+        return "ERROR: User not found!";
 
     }
 }
