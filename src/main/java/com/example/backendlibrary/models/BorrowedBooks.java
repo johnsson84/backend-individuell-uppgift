@@ -12,7 +12,9 @@ public class BorrowedBooks {
     @Id
     private String id;
     private String book_id;
-    private String user_id;
+    private String book_name;
+    private String borrowers_id;
+    private String borrowers_name;
     @CreatedDate
     private Date borrowed_date;
     private String return_date;
@@ -29,7 +31,7 @@ public class BorrowedBooks {
     }
 
     public String getUser_id() {
-        return user_id;
+        return borrowers_id;
     }
 
     public Date getBorrowed_date() {
@@ -38,5 +40,13 @@ public class BorrowedBooks {
 
     public String getReturn_date() {
         return return_date;
+    }
+
+    public String getBook_name() {
+        return book_name;
+    }
+
+    public String getUser_name() {
+        return borrowers_name;
     }
 }
