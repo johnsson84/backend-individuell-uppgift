@@ -14,8 +14,16 @@ public class BooksService {
     BooksRepository bookRepo;
 
     // Add a book to db.
-    public Books addBook(Books book) {
-        return bookRepo.save(book);
+    public String addBook(Books book) {
+        // Temp save all books
+        List<Books> allBooks = bookRepo.findAll();
+        for (Books books : allBooks) {
+            if (book.getTitle().equals(books.getTitle())) {
+                return "Book name already registered!";
+            }
+        }
+        bookRepo.save(book);
+        return "Book \"" + book.getTitle() + "\" added!";
     }
 
     // List all books from db.
@@ -29,13 +37,16 @@ public class BooksService {
     }
 
     // Delete a book by ID
-    public void deleteBook(String id) {
+    public String deleteBook(String id) {
         bookRepo.deleteById(id);
+        return "Book deleted!";
     }
 
     // Update a book by ID
     public String updateBook(String id, Books book) {
+        // Temp save all books
         List<Books> allBooks = bookRepo.findAll();
+        // When updating, check if id in path and body is same and exists in books
         for (Books books : allBooks) {
             if (id.equals(books.getId()) && book.getId().equals(id)) {
                 bookRepo.save(book);
