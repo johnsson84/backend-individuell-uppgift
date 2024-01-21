@@ -12,9 +12,9 @@ public class BorrowedBooks {
     @Id
     private String id;
     private String book_id;
-    private String book_name;
+    private String book_name = "";
     private String borrowers_id;
-    private String borrowers_name;
+    private String borrowers_name = "";
     @CreatedDate
     private Date borrowed_date;
     private String return_date;
@@ -48,5 +48,13 @@ public class BorrowedBooks {
 
     public String getBorrowers_name() {
         return borrowers_name;
+    }
+
+    public void setBook_name(String book_name) {
+        this.book_name = book_name;
+    }
+
+    public void setBorrowers_name(String borrowers_name) {
+        this.borrowers_name = borrowers_name;
     }
 }
