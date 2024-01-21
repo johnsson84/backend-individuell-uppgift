@@ -31,4 +31,10 @@ public class BorrowedBooksController {
     public BorrowedBooks listOneLoan(@PathVariable String id) {
         return borrowService.listOneLoan(id);
     }
+
+    // DELETE Delete a loan
+    @DeleteMapping("/{id}")
+    public String deleteLoan(@PathVariable String id) {
+        return borrowService.deleteLoan(id);
+    }
 }

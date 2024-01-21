@@ -31,16 +31,19 @@ public class BorrowedBooksService {
     public String borrowBook(BorrowedBooks borrow) {
         List<Books> allBooks = bookRepo.findAll();
         List<Users> allUsers = userRepo.findAll();
+        // Find book name and add it the body "borrow"
         for (Books book : allBooks) {
             if (borrow.getBook_id().equals(book.getId())) {
                 borrow.setBook_name(book.getTitle());
             }
         }
+        // Find borrowing users name and add it the body "borrow"
         for (Users user : allUsers) {
             if (borrow.getBorrowers_id().equals(user.getId())) {
                 borrow.setBorrowers_name(user.getName());
             }
         }
+        // If no book name or user name was found, give error
         if (borrow.getBook_name().equals("") || borrow.getBorrowers_name().equals("")) {
             return "ERROR: User or book does not exist";
         }
@@ -51,5 +54,17 @@ public class BorrowedBooksService {
     // List a specific loan
     public BorrowedBooks listOneLoan(String id) {
         return borrowRepo.findById(id).get();
+    }
+
+    // Delete a loan
+    public String deleteLoan(String id) {
+        List<BorrowedBooks> allLoans = borrowRepo.findAll();
+        for (BorrowedBooks loan : allLoans) {
+            if (id.equals(loan.getId())) {
+                borrowRepo.deleteById(id);
+                return "Loan deleted successfully!";
+            }
+        }
+        return "ERROR: Loan does not exist";
     }
 }
