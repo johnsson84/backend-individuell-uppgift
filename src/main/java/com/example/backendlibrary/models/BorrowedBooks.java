@@ -15,4 +15,28 @@ public class BorrowedBooks {
     private String user_id;
     @CreatedDate
     private Date borrowed_date;
+    private String return_date;
+
+    public BorrowedBooks() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getBook_id() {
+        return book_id;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public Date getBorrowed_date() {
+        return borrowed_date;
+    }
+
+    public String getReturn_date() {
+        return return_date;
+    }
 }
