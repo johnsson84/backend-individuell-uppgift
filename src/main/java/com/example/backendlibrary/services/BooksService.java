@@ -15,6 +15,13 @@ public class BooksService {
 
     // Add a book to db.
     public String addBook(Books book) {
+        // Temp save all books
+        List<Books> allBooks = bookRepo.findAll();
+        for (Books books : allBooks) {
+            if (book.getTitle().equals(books.getTitle())) {
+                return "Book name already registered!";
+            }
+        }
         bookRepo.save(book);
         return "Book \"" + book.getTitle() + "\" added!";
     }
