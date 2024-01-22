@@ -53,7 +53,18 @@ public class BorrowedBooksService {
 
     // List a specific loan
     public BorrowedBooks listOneLoan(String id) {
-        return borrowRepo.findById(id).get();
+        List<BorrowedBooks> allLoans = borrowRepo.findAll();
+        // Check if loan exists
+        for (BorrowedBooks loan : allLoans) {
+            if (id.equals(loan.getId())) {
+                return borrowRepo.findById(id).get();
+            }
+        }
+        // If loan does not exists, respond with an empty loan instead
+        // of server 500 crash. This happends if you input a wrong id number.
+        allLoans.clear();
+        allLoans.add(new BorrowedBooks());
+        return allLoans.get(0);
     }
 
     // Delete a loan

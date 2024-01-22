@@ -17,6 +17,7 @@ public class BooksService {
     public String addBook(Books book) {
         // Temp save all books
         List<Books> allBooks = bookRepo.findAll();
+        // Check if book title already exists
         for (Books books : allBooks) {
             if (book.getTitle().equals(books.getTitle())) {
                 return "Book name already registered!";
@@ -33,13 +34,31 @@ public class BooksService {
 
     // List one book by ID
     public Books listOneBook(String id) {
-        return bookRepo.findById(id).get();
+        List<Books> allBooks = bookRepo.findAll();
+        // Check if book exists
+        for (Books book : allBooks) {
+            if (id.equals(book.getId())) {
+                return bookRepo.findById(id).get();
+            }
+        }
+        // If book does not exists, respond with an empty book instead
+        // of server 500 crash. This happends if you input a wrong id number.
+        allBooks.clear();
+        allBooks.add(new Books());
+        return allBooks.get(0);
     }
 
     // Delete a book by ID
     public String deleteBook(String id) {
-        bookRepo.deleteById(id);
-        return "Book deleted!";
+        List<Books> allBooks = bookRepo.findAll();
+        // Check if book exist otherwise error.
+        for (Books book : allBooks) {
+            if (id.equals(book.getId())) {
+                bookRepo.deleteById(id);
+                return "Book deleted!";
+            }
+        }
+        return "ERROR: Book does not exist!";
     }
 
     // Update a book by ID
@@ -53,7 +72,7 @@ public class BooksService {
                 return "Book updated!";
             }
         }
-        return "Book not found...";
+        return "ERROR: Book does not exist or ID mismatch!";
 
     }
 }

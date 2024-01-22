@@ -35,13 +35,31 @@ public class UsersService {
 
     // List one user by ID
     public Users listOneUser(String id) {
-        return userRepo.findById(id).get();
+        List<Users> allUsers = userRepo.findAll();
+        // Check if user exists
+        for (Users user : allUsers) {
+            if (id.equals(user.getId())) {
+                return userRepo.findById(id).get();
+            }
+        }
+        // If user does not exists, respond with an empty user instead
+        // of server 500 crash. This happends if you input a wrong id number.
+        allUsers.clear();
+        allUsers.add(new Users());
+        return allUsers.get(0);
     }
 
     // Delete a user by ID
     public String deleteUser(String id) {
-        userRepo.deleteById(id);
-        return "User deleted!";
+        List<Users> allUsers = userRepo.findAll();
+        // Check if user exist otherwise error
+        for (Users user : allUsers) {
+            if (id.equals(user.getId())) {
+                userRepo.deleteById(id);
+                return "User deleted!";
+            }
+        }
+        return "ERROR: User does not exist!";
     }
 
     // Update a user by ID
